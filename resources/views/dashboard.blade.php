@@ -1,17 +1,100 @@
+@include('navbar')
+<html>
+    <head>
+        <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+
+    </head>
+    <body>
 <h1> user Dashboard Here </h1>
-<!--<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+<div class="area"></div><nav class="main-menu">
+    <ul>
+        <li>
+            <a href="https://jbfarrow.com">
+                <i class="fa fa-home fa-2x"></i>
+                <span class="nav-text">
+                   Community Dashboard
+                </span>
+            </a>
+          
+        </li>
+        <li class="has-subnav">
+            <a href="#">
+                <i class="fa fa-globe fa-2x"></i>
+                <span class="nav-text">
+                    Global Surveyors
+                </span>
+            </a>
+            
+        </li>
+        <li class="has-subnav">
+            <a href="#">
+               <i class="fa fa-comments fa-2x"></i>
+                <span class="nav-text">
+                    Group Hub Forums
+                </span>
+            </a>
+            
+        </li>
+        <li class="has-subnav">
+            <a href="#">
+               <i class="fa fa-camera-retro fa-2x"></i>
+                <span class="nav-text">
+                    Survey Photos
+                </span>
+            </a>
+           
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-film fa-2x"></i>
+                <span class="nav-text">
+                    Surveying Tutorials
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-book fa-2x"></i>
+                <span class="nav-text">
+                   Surveying Jobs
+                </span>
+            </a>
+        </li>
+        <li>
+           <a href="#">
+               <i class="fa fa-cogs fa-2x"></i>
+                <span class="nav-text">
+                    Tools & Resources
+                </span>
+            </a>
+        </li>
+        <li>
+           <a href="#">
+                <i class="fa fa-map-marker fa-2x"></i>
+                <span class="nav-text">
+                    Member Map
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+               <i class="fa fa-info fa-2x"></i>
+                <span class="nav-text">
+                    Documentation
+                </span>
+            </a>
+        </li>
+    </ul>
 
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <x-jet-welcome />
-            </div>
-        </div>
-    </div>
-</x-app-layout> -->
+    <ul class="logout">
+        <li>
+           <a href="#">
+                 <i class="fa fa-power-off fa-2x"></i>
+                <span class="nav-text">
+                    Logout
+                </span>
+            </a>
+        </li>  
+    </ul>
+</nav>
+    </body>
