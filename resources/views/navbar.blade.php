@@ -141,29 +141,4 @@
     </div>
   </div>
   <!-- Topbar End -->
-  
-<!-- top-banner -->
-<div class="container">
-  <img src="{{ asset('bg.jpeg') }}"  alt="Render4less" class="img-fluid">
-  <div class="jumbotron">
-    <h1>We are the number One 3D rendering platform for architects.</h1>
-    <p>Flat rate: Only $49.99/Hour</p>
-    <p>Create your Free account today</p>
-    <form>
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Name" required>
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Company Name (optional)">
-      </div>
-      <div class="form-group">
-        <input type="email" class="form-control" placeholder="Email" required>
-      </div>
-      <button type="submit" class="btn btn-primary">Sign Up</button>
-    </form>
-    <p>Get $200 credit when you join today (5 hour equivalent)</p>
-  </div>
-</div>
-<!-- end top-banner -->
-</body>
-</html>
+</body></html>

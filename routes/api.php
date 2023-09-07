@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,3 +19,19 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+/* API endpoints for CRUD operations on projects and files */
+
+// Projects endpoints
+Route::get('/projects', [ProjectController::class, 'index']);
+Route::post('/projects', [ProjectController::class, 'store']);
+Route::get('/projects/{id}', [ProjectController::class, 'show']);
+Route::put('/projects/{id}', [ProjectController::class, 'update']);
+Route::delete('/projects/{id}', [ProjectController::class, 'destroy']);
+
+// Files endpoints
+Route::get('/files', [FileController::class, 'index']);
+Route::post('/files', [FileController::class, 'store']);
+Route::get('/files/{id}', [FileController::class, 'show']);
+Route::put('/files/{id}', [FileController::class, 'update']);
+Route::delete('/files/{id}', [FileController::class, 'destroy']);

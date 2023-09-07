@@ -38,6 +38,22 @@ Route::get('/test',function () {
         'cours' => ['PHP','HTML','MVC','LARAVEL']
     ]);
 });
+
+/** my projects route */
+Route::get('/myprojects', function () {
+    return view('myprojects');
+})->name('myprojects');
+
+/** dashboard route */
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
+/** Contact Support route */
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+
 Route::get('/test/{nom}/{prenom}', function (Request $request) {
     return view('test', [
         'nom' => $request->nom,
