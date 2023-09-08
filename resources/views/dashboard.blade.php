@@ -110,28 +110,126 @@ Payments Setting
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" fill="var(--c-text-secondary)"/></svg>
 		</button>
 	</div>
-	<div class="modal-body">
-		<h2 class="modal-title">Upload New Project</h2>
-		<p class="modal-description">Attach the file below</p>
-		<button class="upload-area">
-			<span class="upload-area-icon" >
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="140.531" height="150.116" viewBox="0 0 340.531 419.116">
-  <g id="files-new" clip-path="url(#clip-files-new)">
-    <path id="Union_2" data-name="Union 2" d="M-2904.708-8.885A39.292,39.292,0,0,1-2944-48.177V-388.708A39.292,39.292,0,0,1-2904.708-428h209.558a13.1,13.1,0,0,1,9.3,3.8l78.584,78.584a13.1,13.1,0,0,1,3.8,9.3V-48.177a39.292,39.292,0,0,1-39.292,39.292Zm-13.1-379.823V-48.177a13.1,13.1,0,0,0,13.1,13.1h261.947a13.1,13.1,0,0,0,13.1-13.1V-323.221h-52.39a26.2,26.2,0,0,1-26.194-26.195v-52.39h-196.46A13.1,13.1,0,0,0-2917.805-388.708Zm146.5,241.621a14.269,14.269,0,0,1-7.883-12.758v-19.113h-68.841c-7.869,0-7.87-47.619,0-47.619h68.842v-18.8a14.271,14.271,0,0,1,7.882-12.758,14.239,14.239,0,0,1,14.925,1.354l57.019,42.764c.242.185.328.485.555.671a13.9,13.9,0,0,1,2.751,3.292,14.57,14.57,0,0,1,.984,1.454,14.114,14.114,0,0,1,1.411,5.987,14.006,14.006,0,0,1-1.411,5.973,14.653,14.653,0,0,1-.984,1.468,13.9,13.9,0,0,1-2.751,3.293c-.228.2-.313.485-.555.671l-57.019,42.764a14.26,14.26,0,0,1-8.558,2.847A14.326,14.326,0,0,1-2771.3-147.087Z" transform="translate(2944 428)" fill="var(--c-action-primary)"/>
-  </g>
-</svg>
-			</span>
-			<span class="upload-area-title">Drag file(s) here to upload.</span>
-            <span style="font-size: 12px;"> dwg ,dxf ,pdf, Jpeg, png</span>
-			<span class="upload-area-description">
-				Alternatively, you can select a file by <br/><strong>clicking here</strong>
-			</span>
-		</button>
-	</div>
-	<div class="modal-footer">
-		<button class="btn-secondary">Cancel</button>
-		<button class="btn-primary">Upload File</button>
-	</div>
+	<div id="upload-modal">
+        <div class="modal-body">
+            <h2 class="modal-title">Upload New Project</h2>
+            <p class="modal-description">Attach the file below</p>
+            <label class="upload-area">
+                <span class="upload-area-icon">
+                    <!-- Paste the SVG code here -->
+                </span>
+                <span class="upload-area-title">Drag file(s) here to upload.</span>
+                <span style="font-size: 12px;">dwg, dxf, pdf, Jpeg, png</span>
+                <span class="upload-area-description">
+                    Alternatively, you can select a file by <br/><strong><a href="#" id="file-input-link">clicking here</a></strong>
+                </span>
+                <input type="file" id="file-input" style="display: none;">
+            </label>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-secondary">Cancel</button>
+            <button class="btn-primary" id="upload-button">Upload File</button>
+        </div>
+        <div class="upload-message" id="success-message" style="display: none;">File uploaded successfully!</div>
+    </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://apis.google.com/js/api.js"></script>
+<script>
+    $(document).ready(function() {
+        // Handle file selection when "clicking here" link is clicked
+        $('#file-input-link').click(function(event) {
+            event.preventDefault();
+            $('#file-input').click();
+        });
+
+        // Handle file selection
+        $('#file-input').change(function() {
+            var fileName = $(this).val().split('\\').pop();
+            $('.upload-area-title').text(fileName);
+        });
+
+        // Load the Google Drive API
+        gapi.load('client:auth2', initializeGoogleDriveAPI);
+
+        // Initialize the Google Drive API client
+        function initializeGoogleDriveAPI() {
+            gapi.client.init({
+                apiKey: 'AIzaSyBX8Ak5kqGDbDDgM8rTE_V9n3Txu4ty47I', // Replace with your Google API key
+                clientId: '364285194887-1d1hsh9pdb7fbo3bj1bcj029v814p0ou.apps.googleusercontent.com', // Replace with your Google API client ID
+                discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'],
+                scope: 'https://www.googleapis.com/auth/drive.file',
+                redirectUri: 'http://localhost:60249/' // Replace with the correct redirect URI
+            }).then(function() {
+                // Listen for sign-in state changes
+                gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+            });
+        }
+
+        // Update the sign-in status
+        function updateSigninStatus(isSignedIn) {
+            if (isSignedIn) {
+                $('#upload-button').prop('disabled', false);
+            } else {
+                $('#upload-button').prop('disabled', true);
+            }
+        }
+
+        // Handle file upload
+        $('#upload-button').click(function() {
+            var file = $('#file-input').prop('files')[0];
+            if (!file) {
+                console.log('No file selected.');
+                return;
+            }
+
+            gapi.auth2.getAuthInstance().signIn().then(function() {
+                var folderId = '1VMEGMhr51UwZ3FFLvg0qxv77Ec_Oh_Zx'; // Replace with the folder ID where you want to upload the file
+                var metadata = {
+                    name: file.name,
+                    parents: [folderId]
+                };
+
+                var uploader = new MediaUploader({
+                    baseUrl: 'https://www.googleapis.com/upload/drive/v3/files',
+                    file: file,
+                    token: gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token,
+                    metadata: metadata,
+                    onComplete: function(response) {
+                        console.log(response);
+                        console.log('Upload complete.');
+                        // Show success message or perform additional actions
+                    },
+                    onError: function(response) {
+                        console.log(response);
+                        console.log('Upload failed.');
+                        // Show error message or handle the error
+                    }
+                });
+                uploader.upload();
+            });
+        });
+    });
+
+    function MediaUploader(options) {
+        var self = this;
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', options.baseUrl + '?' + $.param(options.params), true);
+        xhr.setRequestHeader('Authorization', 'Bearer ' + options.token);
+        xhr.setRequestHeader('Content-Type', options.file.type);
+        xhr.setRequestHeader('Content-Length', options.file.size);
+        xhr.onload = function(e) {
+            if (xhr.status === 200) {
+                options.onComplete(JSON.parse(xhr.response));
+            } else {
+                options.onError(JSON.parse(xhr.response));
+            }
+        };
+        xhr.onerror = function(e) {
+            options.onError(xhr.statusText);
+        };
+        xhr.send(options.file);
+    }
+</script>
     </body>
 </html>

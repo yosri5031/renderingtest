@@ -73,3 +73,5 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::post('/upload', [UploadController::class, 'upload'])->name('upload');

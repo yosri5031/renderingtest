@@ -29,6 +29,11 @@ Route::get('/projects/{id}', [ProjectController::class, 'show']);
 Route::put('/projects/{id}', [ProjectController::class, 'update']);
 Route::delete('/projects/{id}', [ProjectController::class, 'destroy']);
 
+//billing endpoints
+Route::post('/projects/quote', 'ProjectController@quote');
+Route::post('/projects/approve', 'ProjectController@approve');
+Route::post('/projects/bill', 'ProjectController@bill');
+
 // Files endpoints
 Route::get('/files', [FileController::class, 'index']);
 Route::post('/files', [FileController::class, 'store']);

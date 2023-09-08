@@ -86,9 +86,14 @@
         margin-right: 10px;
     }
 </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/microsoft-translator-browser-sdk/lib/index.js"></script>
+
 </head>
 
 <body>
+    <div id="content" data-original-lang="en">
+
    <!-- home page auth -->
    
 
@@ -138,6 +143,9 @@
                 @endauth
             </div>
         @endif
+    </div>
+    <div id="google_translate_element">
+       
     </div>
   </div>
   <!-- Topbar End -->
@@ -294,7 +302,7 @@
           </div>
 
           <h1 class="text-white mb-4">The Bouraoui Group Ltd </h1>
-          <h5 class="text-white mb-0">With over 15 years of experience in Supply Chain and Network Operations practice, we can help you imagine, design, build, deliver, and run a robust supply chain.</h5>
+          <h5 class="text-white mb-0">  With over 15 years of experience in Supply Chain and Network Operations practice, we can help you imagine, design, build, deliver, and run a robust supply chain. </h5>
       </div>
       <div class="container position-relative wow fadeInUp" data-wow-delay="0.1s" style="margin-top: -6rem;">
           <div class="row justify-content-center">
@@ -419,13 +427,11 @@
   </div>
   <!-- Footer End -->
 
-
   <!-- Back to Top -->
   <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-0 back-to-top"><i class="bi bi-arrow-up"></i></a>
-
+  </div>
 
   <!-- JavaScript Libraries -->
-  <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('lib/wow/wow.min.js') }}"></script>
 <script src="{{ asset('lib/easing/easing.min.js') }}"></script>
@@ -438,6 +444,19 @@
 
 <!-- Template Javascript -->
 <script src="{{ asset('js/main.js') }}"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- translator script -->
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"> </script>
+<script>
+function googleTranslateElementInit(){
+    new google.translate.TranslateElement(
+        {pageLanguage: 'en'},
+        'google_translate_element'
+    );
+}
+</script>
+
 </body>
 
 </html>
