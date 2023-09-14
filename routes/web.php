@@ -75,3 +75,13 @@ Route::middleware([
 });
 
 Route::post('/upload', [UploadController::class, 'upload'])->name('upload');
+
+/* CRUD */
+
+Route::get('/items', 'ItemController@index')->name('items.index');
+Route::get('/items/create', 'ItemController@create')->name('items.create');
+Route::post('/items', 'ItemController@store')->name('items.store');
+Route::get('/items/{item}', 'ItemController@show')->name('items.show');
+Route::get('/items/{item}/edit', 'ItemController@edit')->name('items.edit');
+Route::put('/items/{item}', 'ItemController@update')->name('items.update');
+Route::delete('/items/{item}', 'ItemController@destroy')->name('items.destroy');
