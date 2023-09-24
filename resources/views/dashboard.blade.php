@@ -81,12 +81,15 @@ Payments Setting
 
     <ul class="logout">
         <li>
-           <a href="#">
-                 <i class="fa fa-power-off fa-2x"></i>
+            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="fa fa-power-off fa-2x"></i>
                 <span class="nav-text">
                     Logout
                 </span>
             </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
         </li>  
     </ul>
 </nav>

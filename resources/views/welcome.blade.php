@@ -158,6 +158,7 @@
     <p>Flat rate: Only $49.99/Hour</p>
     <p>Create your Free account today</p>
     <form>
+        <!--
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Name" required>
       </div>
@@ -166,9 +167,9 @@
       </div>
       <div class="form-group">
         <input type="email" class="form-control" placeholder="Email" required>
-      </div>
-      <button type="submit" class="btn btn-primary">Sign Up</button>
-    </form>
+      </div>--> 
+      <a href="{{ route('dashboard') }}" class="btn btn-primary" style="font-size:26px;">Sign Up</a>
+        </form>
     <p>Get $200 credit when you join today (5 hour equivalent)</p>
   </div>
 </div>
@@ -307,40 +308,39 @@
       <div class="container position-relative wow fadeInUp" data-wow-delay="0.1s" style="margin-top: -6rem;">
           <div class="row justify-content-center">
               <div class="col-lg-8">
-                  <div class="bg-light text-center p-5">
-                      <h1 class="mb-4">Request A Quote</h1>
-                      <form>
-                          <div class="row g-3">
-                              <div class="col-12 col-sm-6">
-                                  <input type="text" class="form-control border-0" placeholder="Your Name" style="height: 55px;">
-                              </div>
-                              <div class="col-12 col-sm-6">
-                                  <input type="email" class="form-control border-0" placeholder="Your Email" style="height: 55px;">
-                              </div>
-                              <div class="col-12 col-sm-6">
-                                  <select class="form-select border-0" style="height: 55px;">
-                                      <option selected>Select A Service</option>
-                                      <option value="1">Service 1</option>
-                                      <option value="2">Service 2</option>
-                                      <option value="3">Service 3</option>
-                                  </select>
-                              </div>
-                              <div class="col-12 col-sm-6">
-                                  <div class="date" id="date1" data-target-input="nearest">
-                                      <input type="text"
-                                          class="form-control border-0 datetimepicker-input"
-                                          placeholder="Company" style="height: 55px;">
-                                  </div>
-                              </div>
-                              <div class="col-12">
-                                  <textarea class="form-control border-0" placeholder="Project Details , 2D Plan ..."></textarea>
-                              </div>
-                              <div class="col-12">
-                                  <button class="btn btn-primary w-100 py-3" type="submit">Send Now</button>
-                              </div>
-                          </div>
-                      </form>
-                  </div>
+                <div class="bg-light text-center p-5">
+                    <h1 class="mb-4">Request A Quote</h1>
+                    <form action="{{ route('quote') }}" method="POST">
+                        @csrf
+                        <div class="row g-3">
+                            <div class="col-12 col-sm-6">
+                                <input type="text" name="name" class="form-control border-0" placeholder="Your Name" style="height: 55px;">
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <input type="email" name="email" class="form-control border-0" placeholder="Your Email" style="height: 55px;">
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <select name="service" class="form-select border-0" style="height: 55px;">
+                                    <option selected>Select A Service</option>
+                                    <option value="1">Architecture</option>
+                                    <option value="2">Immobilier</option>
+                                    <option value="3">Décoration</option>
+                                </select>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="date" id="date1" data-target-input="nearest">
+                                    <input type="text" name="company" class="form-control border-0 datetimepicker-input" placeholder="Company" style="height: 55px;">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <textarea name="project_details" class="form-control border-0" placeholder="Project Details, 2D Plan ..."></textarea>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100 py-3" type="submit">Send Now</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
               </div>
           </div>
       </div>

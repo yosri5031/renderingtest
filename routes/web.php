@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\homecontroller;
+use App\Http\Controllers\QuoteController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,7 +64,6 @@ Route::get('/test/{nom}/{prenom}', function (Request $request) {
 }
 );
 
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -85,3 +85,6 @@ Route::get('/items/{item}', 'ItemController@show')->name('items.show');
 Route::get('/items/{item}/edit', 'ItemController@edit')->name('items.edit');
 Route::put('/items/{item}', 'ItemController@update')->name('items.update');
 Route::delete('/items/{item}', 'ItemController@destroy')->name('items.destroy');
+
+
+Route::post('/submit-quote-request', 'App\Http\Controllers\QuoteController@submitQuoteRequest')->name('quote');
